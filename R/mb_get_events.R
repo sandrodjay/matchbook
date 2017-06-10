@@ -64,7 +64,7 @@ mb_get_events <- function(session_data,sport_ids=NULL,start_date=NULL,end_date=N
     param_list <- c(param_list,before=end_date_epoch)
   }
   
-  get_events_resp    <- httr::GET("https://www.matchbook.com/bpapi/edge/events",query=param_list,httr::content_type_json(),httr::accept_json(),httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf')  )
+  get_events_resp    <- httr::GET("https://www.matchbook.com/edge/events",query=param_list,httr::content_type_json(),httr::accept_json(),httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf')  )
   status_code        <- get_events_resp$status_code  
   if(status_code==200)
   {
