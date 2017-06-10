@@ -95,7 +95,7 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   if(interval>0){
     param_list <- c(param_list,interval=interval)
   }
-  get_bets_resp    <- httr::GET(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))  
+  get_bets_resp    <- httr::GET(paste("https://www.matchbook.com/edge/rest/offers",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))  
   status_code        <- get_bets_resp$status_code  
   if(status_code==200)
   {

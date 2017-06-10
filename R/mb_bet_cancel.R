@@ -77,7 +77,7 @@ mb_bet_cancel <- function(session_data,bet_id=NULL,event_id=NULL,market_id=NULL,
     content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
     content$status_code <- status_code
   } else{
-    print(paste("Warning/Error in communicating with cancel bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))
+    print(paste("Warning/Error in communicating with cancel bet at https://www.matchbook.com/edge/rest/offers",sep=""))
     content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
     content$status_code <- status_code
   }
