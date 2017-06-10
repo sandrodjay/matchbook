@@ -63,7 +63,7 @@ mb_bet_place <- function(session_data,runner_id,side,stake,odds)
   bet_list <- data.frame('runner-id'=runner_id,side=side,stake=stake,odds=odds,check.names=FALSE)
   
   body_data          <- paste("{'exchange-type':'back-lay','currency' : '",session_data$currency,"','odds-type':'",session_data$odds_type,"', 'offers': ",jsonlite::toJSON(bet_list,data.frame="rows"),"}",sep="")
-  place_bet_resp     <- httr::POST(paste("https://www.matchbook.com/edge/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
+  place_bet_resp     <- httr::POST(paste("https://api.matchbook.com/edge/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
   status_code        <- place_bet_resp$status_code  
   if(status_code==200)
   {

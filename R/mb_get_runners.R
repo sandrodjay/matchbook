@@ -25,7 +25,8 @@
 #' mb_get_runners(session_data=my_session,event_id=123456,market_id=1234567)}
 #' 
 
-mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=FALSE,side=c("back","lay"))
+# mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=FALSE,side=c("back","lay"))
+mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),side=c("back","lay"))
 {
   valid_market_states<- c("suspended","open")
   valid_runner_states<- c("suspended","open")
@@ -59,14 +60,16 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   }
   
   param_list         <- list('exchange-type'='back-lay','odds-type'=session_data$odds_type,currency=session_data$currency,'states'=paste(runner_states,collapse=","),side=paste(side,collapse=","))
-  if(include_prices==TRUE){
-    param_list <- c(param_list,'include-prices'='true')
-  }
+  # if(include_prices==TRUE){
+  #   param_list <- c(param_list,'include-prices'='true')
+  # }
   runner_url_comp    <- ""
   if(!is.null(runner_id)){
     runner_url_comp    <- paste("/",runner_id,sep="")
   }
-  get_runners_resp   <- httr::GET(paste("https://www.matchbook.com/edge/rest/events/",event_id,"/markets/",market_id,"/runners",runner_url_comp,sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  #get_runners_resp   <- httr::GET(paste("https://api.matchbook.com/edge/rest/events/",event_id,"/markets/",market_id,"/runners",runner_url_comp,sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  get_runners_resp   <- httr::GET(paste("https://api.matchbook.com/edge/rest/events/",event_id,"/markets/",market_id,"/runners",sep=""),httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  
   status_code        <- get_runners_resp$status_code  
   if(status_code==200)
   {

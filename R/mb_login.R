@@ -31,11 +31,12 @@ mb_login <- function(username,password,print_balance_details=TRUE)
       odds_type          <- login_resp_content$`account`$`odds-type`
       currency           <- login_resp_content$`account`$`currency`
       user_name          <- login_resp_content$`account`$`username`
-      balance            <- login_resp_content$`account`$`username`
-      balance            <- login_resp_content$`account`$`balance`
-      exposure           <- login_resp_content$`account`$`exposure`
+      #balance            <- login_resp_content$`account`$`balance`
+      #exposure           <- login_resp_content$`account`$`exposure`
       if(print_balance_details){
-        print(paste("Your current balance is ",balance,currency,". Your current exposure is ",round(exposure,4),currency,"",sep=""))        
+        get_balance_resp    <- httr::GET("https://api.matchbook.com/edge/rest/account/balance",httr::set_cookies('session-token'=session_token),httr::add_headers('User-Agent'='rlibnf'))
+        balance <- jsonlite::fromJSON(content(get_balance_resp, "text", "application/json"))
+        print(paste("Your current balance is ",round(balance$balance,2),currency," (thereof free-funds ",round(balance$'free-funds',2),currency,"). Your current exposure is ",round(balance$exposure,2),currency,sep=""))        
       }
     }
     content <- list(status_code=status_code,session_token=session_token,user_id=user_id,language=language,odds_type=odds_type,currency=currency,user_name=user_name,balance=balance,exposure=exposure)
