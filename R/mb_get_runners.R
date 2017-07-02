@@ -74,10 +74,10 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   if(status_code==200)
   {
     if(!is.null(runner_id)){
-      content <- jsonlite::fromJSON(content(get_runners_resp, "text", "application/json"))
+      content <- jsonlite::fromJSON(content(get_runners_resp, "text", "application/json", encoding="UTF-8"))
     } else
     {
-      content <- jsonlite::fromJSON(content(get_runners_resp, "text", "application/json"))$runners
+      content <- jsonlite::fromJSON(content(get_runners_resp, "text", "application/json", encoding="UTF-8"))$runners
     }
   } else
   {

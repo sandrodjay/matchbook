@@ -71,15 +71,15 @@ mb_bet_cancel <- function(session_data,bet_id=NULL,event_id=NULL,market_id=NULL,
   status_code        <- cancel_bet_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json", encoding="UTF-8"))
     content$status_code <- status_code
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
-    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json", encoding="UTF-8"))
     content$status_code <- status_code
   } else{
     print(paste("Warning/Error in communicating with cancel bet at https://www.matchbook.com/edge/rest/offers",sep=""))
-    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json", encoding="UTF-8"))
     content$status_code <- status_code
   }
   return(content)

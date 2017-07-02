@@ -57,10 +57,10 @@ mb_get_settled <- function(session_data,sport_id=NULL,period=NULL,start_date=Sys
   status_code        <- get_markets_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))$markets
+    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json", encoding="UTF-8"))$markets
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
-    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json", encoding="UTF-8"))
     content$status_code <- status_code
   } else
   {

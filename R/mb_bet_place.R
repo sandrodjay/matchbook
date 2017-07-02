@@ -67,15 +67,15 @@ mb_bet_place <- function(session_data,runner_id,side,stake,odds)
   status_code        <- place_bet_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json", encoding="UTF-8"))
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
-    content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json", encoding="UTF-8"))
     content$status_code <- status_code
   } else
   {
     print(paste("Warning/Error in communicating with placing bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))
-    content<- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
+    content<- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json", encoding="UTF-8"))
   }
   return(content)
 }

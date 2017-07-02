@@ -68,7 +68,7 @@ mb_get_markets <- function(session_data,event_id,market_states = c("open","suspe
   status_code        <- get_markets_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))$markets
+    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json", encoding="UTF-8"))$markets
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/events/",event_id,"/markets",sep=""))

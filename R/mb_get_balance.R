@@ -9,7 +9,7 @@ mb_get_balance <- function(session_data)
   status_code        <- get_balance_resp$status_code
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_balance_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(get_balance_resp, "text", "application/json", encoding="UTF-8"))
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/lookups/sports",sep=""))

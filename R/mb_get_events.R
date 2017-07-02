@@ -68,7 +68,7 @@ mb_get_events <- function(session_data,sport_ids=NULL,start_date=NULL,end_date=N
   status_code        <- get_events_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_events_resp, "text", "application/json"))$events
+    content <- jsonlite::fromJSON(content(get_events_resp, "text", "application/json", encoding="UTF-8"))$events
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/events",sep=""))

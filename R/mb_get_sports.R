@@ -28,7 +28,7 @@ mb_get_sports <- function(session_data)
   status_code        <- get_sports_resp$status_code
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_sports_resp, "text", "application/json"))$sports
+    content <- jsonlite::fromJSON(content(get_sports_resp, "text", "application/json", encoding="UTF-8"))$sports
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/lookups/sports",sep=""))

@@ -24,7 +24,7 @@ mb_login <- function(username,password,print_balance_details=TRUE)
     status_code   <- login_resp$status_code
     if(status_code==200)
     {
-      login_resp_content <- jsonlite::fromJSON(content(login_resp, "text", "application/json"))
+      login_resp_content <- jsonlite::fromJSON(content(login_resp, "text", "application/json", encoding="UTF-8" ))
       session_token      <- login_resp_content$`session-token`
       user_id            <- login_resp_content$`user-id`
       language           <- login_resp_content$`account`$`language`
@@ -35,7 +35,7 @@ mb_login <- function(username,password,print_balance_details=TRUE)
       #exposure           <- login_resp_content$`account`$`exposure`
       if(print_balance_details){
         get_balance_resp    <- httr::GET("https://api.matchbook.com/edge/rest/account/balance",httr::set_cookies('session-token'=session_token),httr::add_headers('User-Agent'='rlibnf'))
-        balance <- jsonlite::fromJSON(content(get_balance_resp, "text", "application/json"))
+        balance <- jsonlite::fromJSON(content(get_balance_resp, "text", "application/json",encoding = "UTF-8"))
         print(paste("Your current balance is ",round(balance$balance,2),currency," (thereof free-funds ",round(balance$'free-funds',2),currency,"). Your current exposure is ",round(balance$exposure,2),currency,sep=""))        
       }
     }
