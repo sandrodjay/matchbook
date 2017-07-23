@@ -1,4 +1,4 @@
-#' Perform a Bet Placement Action
+#' Perform a Bet Placement Action Davide
 #' @name mb_bet_place
 #' @description This function provide the core bet placement functionality. Its possible to place a single bet by entering in a single value for each of the runner_id, side, odds and stake parameters. It also possible to place multiple bets at once by passing a vector for each of the runner_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first bet are the first elements of each parameter vector, and that the runner_id, side, odds and stake values for the second bet are the second elements of each parameter vector and so on. There is a cap of 20 on the number of bets that can be placed at one time. NOTE: its is very important to note the 'status' field returned after executing this function to ensure that you be has been matched as you expect. See description for more details.
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.

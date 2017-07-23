@@ -1,4 +1,4 @@
-#' Perform a Bet Cancel Action
+#' Perform a Bet Cancel Action Davide
 #' @name mb_bet_cancel
 #' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the bet_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the bet_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' or 'revised' can not be cancelled. 
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
